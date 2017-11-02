@@ -152,6 +152,7 @@ namespace _20171102_wml218DataCreater
             bCheck.Enabled = false;
             bSave.Enabled = false;
             bConfirm.Enabled = true;
+            tTotalNum.Text = "";
         }
 
         private void bReset_Click(object sender, EventArgs e)
