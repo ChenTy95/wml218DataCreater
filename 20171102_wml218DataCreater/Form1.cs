@@ -24,53 +24,64 @@ namespace _20171102_wml218DataCreater
             string[] userid = new string[totalLines];
             string[] username = new string[totalLines];
             int js = 0;
-            for (int i = 0; i < totalLines; i++)
-            {
-                if (strLine[i] != "")
+            try
+            { 
+                for (int i = 0; i < totalLines; i++)
                 {
-                    js++;
-                    string tmpStr = strLine[i].Replace("\t","`");
-                    userid[js] = tmpStr.Substring(0, tmpStr.IndexOf('`'));
-                    username[js] = tmpStr.Substring(tmpStr.IndexOf('`')).Replace("`", "");
+                    if (strLine[i] != "")
+                    {
+                        js++;
+                        string tmpStr = strLine[i].Replace("\t","`");
+                        userid[js] = tmpStr.Substring(0, tmpStr.IndexOf('`'));
+                        username[js] = tmpStr.Substring(tmpStr.IndexOf('`')).Replace("`", "");
+                    }
                 }
-            }
-            totalLines = js;
-            tTotalNum.Text = totalLines.ToString();
+                totalLines = js;
+                tTotalNum.Text = totalLines.ToString();
 
-            string identityStr = "" ;
-            switch (cBoxIdentity.SelectedIndex)
+                string identityStr = "" ;
+                switch (cBoxIdentity.SelectedIndex)
+                {
+                    case 0:
+                        identityStr = "bk";
+                        break;
+                    case 1:
+                        identityStr = "szy";
+                        break;
+                    case 2:
+                        identityStr = "by";
+                        break;
+                    case 3:
+                        identityStr = "fdy";
+                        break;
+                    case 4:
+                        identityStr = "jg";
+                        break;
+                }
+
+                tPaste.Text = "";
+                tPaste.Text += "[Name]" + tName.Text.Trim() + Environment.NewLine;
+                tPaste.Text += "[TotalRecord]" + totalLines.ToString() + Environment.NewLine;
+                tPaste.Text += "[Identity]" + identityStr + Environment.NewLine;
+                for (int i = 1; i <= totalLines; i++)
+                    tPaste.Text += userid[i] + "," + username[i] + Environment.NewLine;
+                tPaste.Text += "[EOF.]";
+
+                tPaste.ReadOnly = true;
+                bConfirm.Enabled = false;
+                bReset.Enabled = true;
+                bSave.Enabled = true;
+                bCheck.Enabled = false;
+
+                bSave.Focus();
+            }
+            catch
             {
-                case 0:
-                    identityStr = "bk";
-                    break;
-                case 1:
-                    identityStr = "szy";
-                    break;
-                case 2:
-                    identityStr = "by";
-                    break;
-                case 3:
-                    identityStr = "fdy";
-                    break;
-                case 4:
-                    identityStr = "jg";
-                    break;
+                MessageBox.Show("粘贴结果不符合格式要求！\r\n请从Excel表中复制，A列为证件号码，B列为姓名！");
+                ResetInput();
+                bReset.Enabled = false;
             }
-
-            tPaste.Text = "";
-            tPaste.Text += "[Name]" + tName.Text.Trim() + Environment.NewLine;
-            tPaste.Text += "[TotalRecord]" + totalLines.ToString() + Environment.NewLine;
-            tPaste.Text += "[Identity]" + identityStr + Environment.NewLine;
-            for (int i = 1; i <= totalLines; i++)
-                tPaste.Text += userid[i] + "," + username[i] + Environment.NewLine;
-            tPaste.Text += "[EOF.]";
-            tPaste.ReadOnly = true;
-            bConfirm.Enabled = false;
-            bReset.Enabled = true;
-            bSave.Enabled = true;
-            bCheck.Enabled = false;
-
-            bSave.Focus();
+            
         }
 
         private void bSave_Click(object sender, EventArgs e)
@@ -132,7 +143,7 @@ namespace _20171102_wml218DataCreater
                 cBoxIdentity.SelectedIndex = -1;
         }
 
-        private void bReset_Click(object sender, EventArgs e)
+        private void ResetInput()
         {
             gBox1.Enabled = true;
             tPaste.ReadOnly = false;
@@ -141,7 +152,11 @@ namespace _20171102_wml218DataCreater
             bCheck.Enabled = false;
             bSave.Enabled = false;
             bConfirm.Enabled = true;
+        }
 
+        private void bReset_Click(object sender, EventArgs e)
+        {
+            ResetInput();
         }
     }
 }
