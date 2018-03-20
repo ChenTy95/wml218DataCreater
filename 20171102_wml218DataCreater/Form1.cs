@@ -60,7 +60,7 @@ namespace _20171102_wml218DataCreater
                 }
 
                 tPaste.Text = "";
-                tPaste.Text += "[Name]" + tName.Text.Trim() + Environment.NewLine;
+                tPaste.Text += "[Name]" + tInfo.Text.Trim() + Environment.NewLine;
                 tPaste.Text += "[TotalRecord]" + totalLines.ToString() + Environment.NewLine;
                 tPaste.Text += "[Identity]" + identityStr + Environment.NewLine;
                 for (int i = 1; i <= totalLines; i++)

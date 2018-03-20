@@ -83,7 +83,7 @@
             this.lTopic3.Name = "lTopic3";
             this.lTopic3.Size = new System.Drawing.Size(69, 20);
             this.lTopic3.TabIndex = 2;
-            this.lTopic3.Text = "v1.1 Beta";
+            this.lTopic3.Text = "v1.2 Beta";
             // 
             // lName1
             // 
@@ -318,7 +318,7 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "用户数据导入生成器";
+            this.Text = "用户数据导入编辑器";
             this.gBox1.ResumeLayout(false);
             this.gBox1.PerformLayout();
             this.ResumeLayout(false);
